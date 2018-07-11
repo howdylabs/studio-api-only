@@ -41,6 +41,8 @@ var controller = Botkit.platform({
 })
 ```
 
+[![Remix on Glitch](https://cdn.glitch.com/2703baf2-b643-4da7-ab91-7ee2a2d00b5b%2Fremix-button.svg)](https://glitch.com/edit/#!/import/github/howdylabs/studio-api-only)
+
 PROS: content edits that happen here don't require restart or redeploy of the bot app itself
 
 CONS: a new microservice has to be hosted and operated
