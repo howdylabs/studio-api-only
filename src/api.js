@@ -21,6 +21,10 @@ module.exports = function() {
 
   api.mapTriggers = function() {
     for (var s = 0; s < scripts.length; s++) {
+
+      // TODO: remove this when ID is part of datafile
+      scripts[s].id = s;
+
       for (var t = 0; t < scripts[s].triggers.length; t++) {
         triggers.push({trigger: scripts[s].triggers[t], script: s});
       }
