@@ -1,10 +1,57 @@
 This project will serve as a drop-in replacement for users of Botkit Studio.
 
-Ideally, it will work in 2 ways:
+## Get Script Content
 
-* Users can require this module into their app and use it directly within botkit, replacing the botkit.studio commands with local versions
+...
 
-* Users can set up a microservice that replicates Botkit studio's apis and leave their app (mostly) unmodified.
+
+## Add a local script service to a Botkit app
+
+First, npm install this:
+
+```
+npm install --save howdylabs/studio-api-only
+```
+
+then, add to your's main file, just after defining your controller object
+
+```js
+var studio = require('studio-api-only')();
+studio.useLocalStudio(controller);
+
+studio.loadScriptsFromFile(__dirname + '/scripts.json').catch(function(err) {
+  console.error('Error loading scripts', err);
+});
+```
+
+PROS: no external api calls
+
+CONS: script content now has to live in bot repo, requires a restart for content changes
+
+
+## Create a replacement API microservice
+
+Clone this repo and set it up on a public host somewhere. Clicking the glitch link below will do this for you.
+
+Then, modify your Botkit app to include a pointer to this new service.
+
+```
+var controller = Botkit.platform({
+  studio_command_uri: 'https://my.new.service'
+})
+```
+
+PROS: content edits that happen here don't require restart or redeploy of the bot app itself
+
+CONS: a new microservice has to be hosted and operated
+
+
+### Securing API
+
+You can lock down access to the API by specifying one or more access tokens in the TOKENS environment variable (or in the .env file).  
+
+If any tokens are specified, access to the API requies a valid value in the `access_token` url query parameter.  Botkit will automatically use the Botkit Studio `studio_token` value for this.
+
 
 
 TODO:
