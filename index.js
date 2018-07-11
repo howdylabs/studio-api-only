@@ -64,7 +64,7 @@ if (allowed_tokens && allowed_tokens.length) {
 
     // receives: command, user
     webserver.post('/api/v1/commands/id', function(req, res) {
-      api.getScript(req.body.command).then(function(script) {
+      api.getScriptById(req.body.id).then(function(script) {
         res.json(script);
       }).catch(function(err) {
         if (err) {

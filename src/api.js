@@ -99,6 +99,18 @@ module.exports = function() {
     });
   }
 
+  api.getScriptById = function(id) {
+
+    return new Promise(function(resolve, reject) {
+      for (var s = 0; s < scripts.length; s++) {
+        if (id == scripts[s]._id) { // TODO: why use mongo style id?
+          return resolve(scripts[s]);
+        }
+      }
+      reject();
+    });
+  }
+
   api.getScripts = function(tag) {
 
     return new Promise(function(resolve, reject) {
@@ -110,6 +122,13 @@ module.exports = function() {
       resolve(scripts);
     });
 
+  }
+
+
+  api.useLocalStudio = function(botkit) {
+
+    var mutagen = require(__dirname + '/botkit_mutagen.js');
+    return mutagen(api, botkit);
   }
 
   return api;
