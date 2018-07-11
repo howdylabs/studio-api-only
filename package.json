@@ -1,5 +1,5 @@
 {
-  "name": "botkit-cms",
+  "name": "studio-api-only",
   "version": "1.0.0",
   "description": "",
   "main": "src/api.js",
